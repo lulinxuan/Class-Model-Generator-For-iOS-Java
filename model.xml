@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <namespace name="A">
+        <model name="ClassA">
+            <field name="var1" type="int"/>
+            <field name="var2" type="String"/>
+            <field name="time" type="Date"/>
+            <field name="isCorrect" type="boolean"/>
+            <field name="time2" type="String" collection="array"/>
+            <field name="time4" type="Date" collection="set"/>
+        </model>
+        <model name="ClassB">
+            <field name="var3" type="int"/>
+            <field name="var4" type="String"/>
+        </model>
+    </namespace>
+    
+    <namespace name="B">
+        <model name="ClassC">
+            <field name="var1" type="int"/>
+            <field name="var2" type="String"/>
+        </model>
+    </namespace>
+</root>
