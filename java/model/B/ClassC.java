@@ -6,8 +6,10 @@ import java.util.*;
 
 public class ClassC implements Serializable{
 
-    public ClassC(){}    private int var1;
-    private String var2;
+    public ClassC(){}
+
+    private int var1 = 0;
+    private String var2 = "";
 
 
     public ClassC(JSONObject dict) throws JSONException{

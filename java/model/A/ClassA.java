@@ -6,12 +6,14 @@ import java.util.*;
 
 public class ClassA implements Serializable{
 
-    public ClassA(){}    private int var1;
-    private String var2;
-    private Date time;
-    private boolean isCorrect;
-    private List<String> time2;
-    private Set<Date> time4;
+    public ClassA(){}
+
+    private int var1 = 0;
+    private String var2 = "";
+    private Date time = new Date();
+    private boolean isCorrect = false;
+    private List<String> time2 = new ArrayList<>();
+    private Set<Date> time4 = new HashSet<>();
 
 
     public ClassA(JSONObject dict) throws JSONException{

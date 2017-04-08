@@ -13,10 +13,37 @@ def getType(field):
     
     return type
 
+def getDefaultValue(field):
+    
+    type = field.get('type')
+    
+    try:
+        collection = field.get('collection')
+        if collection == 'array':
+            return 'new ArrayList<>()'
+        if collection == 'set':
+            return 'new HashSet<>()'
+    except Exception:
+        pass
+    
+    if type == 'String':
+        return '\"\"'
+    if type == 'Date':
+        return 'new Date()'
+    if type == 'int':
+        return '0'
+    if type == 'double':
+        return '0.0'
+    if type == 'boolean':
+        return 'false'
+
+    
+    return type
+
 def getVariable(f, xmlElement):
     for field in xmlElement.findall('field'):
         varType=getType(field)
-        f.write('    private '+varType+' '+field.get('name')+';\n')
+        f.write('    private '+varType+' '+field.get('name')+' = '+getDefaultValue(field)+';\n')
 
 def getGetterAndSetter(f, xmlElement):
     for field in xmlElement.findall('field'):
@@ -69,7 +96,7 @@ def createJavaModel(modelName, prefix, path, xmlElement):
     f.write('import java.util.*;\n\n')
     
     f.write('public class '+modelName+' implements Serializable{\n\n')
-    f.write('    public '+modelName+'(){}')
+    f.write('    public '+modelName+'(){}\n\n')
     getVariable(f, xmlElement)
     f.write('\n\n')
     getConstructor(f, modelName, xmlElement)
