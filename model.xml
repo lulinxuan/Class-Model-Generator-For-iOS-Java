@@ -2,12 +2,12 @@
 <root>
     <namespace name="A">
         <model name="ClassA">
-            <field name="var1" type="int"/>
-            <field name="var2" type="String"/>
-            <field name="time" type="Date"/>
-            <field name="isCorrect" type="boolean"/>
-            <field name="time2" type="String" collection="array"/>
-            <field name="time4" type="Date" collection="set"/>
+            <field name="intVar" type="int"/>
+            <field name="strVar" type="String"/>
+            <field name="dateVar" type="Date"/>
+            <field name="boolVar" type="boolean"/>
+            <field name="arrVar" type="String" collection="array"/>
+            <field name="setVar" type="Date" collection="set"/>
         </model>
         <model name="ClassB">
             <field name="var3" type="int"/>

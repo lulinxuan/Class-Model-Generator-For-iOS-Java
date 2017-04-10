@@ -4,77 +4,79 @@ import UIKit
 
 class ClassA{
 
-    var var1 = Int()
-    var var2 = String()
-    var time = Date()
-    var isCorrect = Bool()
-    var time2 = [String]()
-    var time4 = Set<Date>()
+    var intVar = Int()
+    var strVar = String()
+    var dateVar = Date()
+    var boolVar = Bool()
+    var arrVar = [String]()
+    var setVar = Set<Date>()
 
 
     init(){}
 
     init(dict:Dictionary<String, String>){
-        self.var1 = Int(dict["var1"]!)!
-        self.var2 = dict["var2"]!
-        self.time = Date(timeIntervalSince1970: Double(dict["time"]!)!)
-        self.isCorrect = Bool(dict["isCorrect"]!)!
+        self.intVar = Int(dict["intVar"]!)!
+        self.strVar = dict["strVar"]!
+        self.dateVar = Date(timeIntervalSince1970: Double(dict["dateVar"]!)!)
+        self.boolVar = Bool(dict["boolVar"]!)!
+        self.arrVar = dict["arrVar"]!.components(separatedBy: "#,#")
     }
 
-    func setVar1(var1:Int){
-        self.var1=var1
+    func setIntvar(intVar:Int){
+        self.intVar=intVar
     }
 
-    func getVar1()->Int{
-        return self.var1
+    func getIntvar()->Int{
+        return self.intVar
     }
 
-    func setVar2(var2:String){
-        self.var2=var2
+    func setStrvar(strVar:String){
+        self.strVar=strVar
     }
 
-    func getVar2()->String{
-        return self.var2
+    func getStrvar()->String{
+        return self.strVar
     }
 
-    func setTime(time:Date){
-        self.time=time
+    func setDatevar(dateVar:Date){
+        self.dateVar=dateVar
     }
 
-    func getTime()->Date{
-        return self.time
+    func getDatevar()->Date{
+        return self.dateVar
     }
 
-    func setIscorrect(isCorrect:Bool){
-        self.isCorrect=isCorrect
+    func setBoolvar(boolVar:Bool){
+        self.boolVar=boolVar
     }
 
-    func getIscorrect()->Bool{
-        return self.isCorrect
+    func getBoolvar()->Bool{
+        return self.boolVar
     }
 
-    func setTime2(time2:[String]){
-        self.time2=time2
+    func setArrvar(arrVar:[String]){
+        self.arrVar=arrVar
     }
 
-    func getTime2()->[String]{
-        return self.time2
+    func getArrvar()->[String]{
+        return self.arrVar
     }
 
-    func setTime4(time4:Set<Date>){
-        self.time4=time4
+    func setSetvar(setVar:Set<Date>){
+        self.setVar=setVar
     }
 
-    func getTime4()->Set<Date>{
-        return self.time4
+    func getSetvar()->Set<Date>{
+        return self.setVar
     }
 
     func toDict()->Dictionary<String, String>{
         var dict = Dictionary<String, String>()
-        dict["var1"] = String(self.var1)
-        dict["var2"] = String(self.var2)
-        dict["time"] = String(Int(self.time.timeIntervalSince1970))
-        dict["isCorrect"] = String(self.isCorrect)
+        dict["intVar"] = String(self.intVar)
+        dict["strVar"] = String(self.strVar)
+        dict["dateVar"] = String(Int(self.dateVar.timeIntervalSince1970))
+        dict["boolVar"] = String(self.boolVar)
+        dict["arrVar"] = self.arrVar.joined(separator: "#,#")
         return dict
     }
 }

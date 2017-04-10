@@ -61,11 +61,14 @@ def getToDict(f, xmlElement):
     f.write('    public JSONObject toDict() throws JSONException{\n')
     f.write('        JSONObject dict = new JSONObject();\n')
     for field in xmlElement.findall('field'):
+        name=field.get('name')
         if field.get('collection') is not None:
+            if field.get('type') == 'String':
+                f.write('        dict.put(\"'+name+'\", String.join(\"#,#\",this.'+name+'));\n')
             continue
         
-        name=field.get('name')
-        if(field.get('type') == 'Date'):
+        
+        if field.get('type') == 'Date':
             f.write('        dict.put(\"'+name+'\", String.valueOf((int)(this.'+name+'.getTime()/1000)));\n')
         else:
             f.write('        dict.put(\"'+name+'\", String.valueOf(this.'+name+'));\n')
@@ -75,10 +78,12 @@ def getToDict(f, xmlElement):
 def getConstructor(f, modelName, xmlElement):
     f.write('    public '+modelName+'(JSONObject dict) throws JSONException{\n')
     for field in xmlElement.findall('field'):
-        if field.get('collection') is not None:
-            continue
-    
         name=field.get('name')
+
+        if field.get('collection') is not None:
+            if field.get('type') == 'String':
+                f.write('        this.'+name+' = Arrays.asList(dict.getString'+'(\"'+name+'\").split(\"#,#\"));\n')
+            continue
         
         if(field.get('type') == 'Date'):
             f.write('        this.'+name+' = new Date(((long)dict.getInt(\"'+name+'\"))*1000);\n')

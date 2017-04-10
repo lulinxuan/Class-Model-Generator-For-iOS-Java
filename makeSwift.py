@@ -37,10 +37,13 @@ def getToDict(f, xmlElement):
     f.write('    func toDict()->Dictionary<String, String>{\n')
     f.write('        var dict = Dictionary<String, String>()\n')
     for field in xmlElement.findall('field'):
-        if field.get('collection') is not None:
-            continue
-        
         name=field.get('name')
+
+        if field.get('collection') is not None:
+            if field.get('type') == 'String':
+                f.write('        dict[\"'+name+'\"] = self.'+name+'.joined(separator: "#,#")\n')
+            continue
+
         if(field.get('type') == 'Date'):
             f.write('        dict[\"'+name+'\"] = String(Int(self.'+name+'.timeIntervalSince1970))\n')
         else:
@@ -51,10 +54,12 @@ def getToDict(f, xmlElement):
 def getConstructor(f, xmlElement):
     f.write('    init(dict:Dictionary<String, String>){\n')
     for field in xmlElement.findall('field'):
-        if field.get('collection') is not None:
-            continue
-
         name=field.get('name')
+
+        if field.get('collection') is not None:
+            if field.get('type') == 'String':
+                f.write('        self.'+name+' = dict[\"'+name+'\"]!.components(separatedBy: "#,#")\n')
+            continue
 
         if(field.get('type') == 'Date'):
             f.write('        self.'+name+' = Date(timeIntervalSince1970: Double(dict[\"'+name+'\"]!)!)\n')
